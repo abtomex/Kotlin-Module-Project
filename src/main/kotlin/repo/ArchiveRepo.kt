@@ -10,11 +10,8 @@ object ArchiveRepo : AbstractRepo<Archive>() {
         return "Архив"
     }
 
-    fun getOneByName(name: String): Archive? {
-        val foundByName = getByName(name)
-        if (foundByName.isEmpty()) return null
-
-        return fillNotes(foundByName.first())
+    override fun getAll(): Set<Archive> {
+        return super.getAll().map { archive: Archive -> this.fillNotes(archive) }.toSet()
     }
 
     override fun getById(id: Int): Archive {

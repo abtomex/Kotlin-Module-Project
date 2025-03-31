@@ -14,7 +14,7 @@ object ConsoleManager {
         do {
 
             consoleView?.show()
-            val input = Scanner(System.`in`).nextLine()
+            val input = Scanner(System.`in`).nextInt()
             consoleView = consoleView?.forward(input)
 
         } while (consoleView != null)

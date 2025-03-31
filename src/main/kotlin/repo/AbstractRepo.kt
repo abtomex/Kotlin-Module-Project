@@ -15,7 +15,7 @@ abstract class AbstractRepo<T: AbstractEntity>{
 
     }
 
-    fun getAll(): Set<T> {
+    open fun getAll(): Set<T> {
         return collection
     }
 

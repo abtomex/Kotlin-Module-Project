@@ -8,15 +8,15 @@ abstract class AbstractConsoleDictionary<E, R>(val parentId: Int) :
     ViewDecorator where E: AbstractEntity, R: AbstractRepo<E> {
 
     abstract val repo: R
-    abstract val model: Set<E>
+    abstract val model: List<E>
 
-    override fun show() {
+    override fun show() : Int {
 
         var idx = 0
         model
             .map { entity -> String.format("%d. %s", ++idx, entity.name) }
             .forEach { println(it) }
+        return idx
     }
-
 
 }

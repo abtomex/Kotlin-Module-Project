@@ -9,39 +9,43 @@ class ArchiveDictionary : AbstractConsoleDictionary<Archive, ArchiveRepo>(0) {
 
 
     override val repo = ArchiveRepo
-    override val model: Set<Archive> = repo.getAll()
+    override val model: List<Archive> = repo.getAll().toList()
 
-    override fun forward(input: String): ViewDecorator? {
+    override fun forward(input: Int): ViewDecorator? {
 
         when(input) {
-            "new" -> {
+            0 -> {
                 println("---Создание архива---")
                 println("Введите имя архива")
                 val name = Scanner(System.`in`).nextLine().trim()
+                if(name.isEmpty()) {
+                    println("! Имя архива не может быть пустым")
+                    return ArchiveDictionary()
+                }
 
                 repo.save(Archive(name))
                 println("+++ Архив успешно создан +++")
                 return ArchiveDictionary()
             }
-            "exit" -> return null
+            model.size + 1 -> return null
             else -> {
-                val selected = repo.getOneByName(input)
-                if(selected == null) {
-                    println("! Введите корректное имя архива")
+                if(input > model.size + 1) {
+                    println("! Введите корректный номер архива")
                     return this
                 }
-                return NoteDictionary(selected.notes.values.toSet(), selected.id)
+                val selected = model[input-1]
+                return NoteDictionary(selected.notes.values.toList(), selected.id, selected.name)
 
             }
         }
 
     }
 
-    override fun show() {
+    override fun show() : Int {
         println("---Выберите архив---")
-        println("---- exit для выхода из приложения")
-        println("---- new для добавления нового")
-
-        super.show()
+        println("0. Добавить новый архив")
+        val maxIdx = super.show()
+        println("${maxIdx + 1}. Завершить приложение ")
+        return 0
     }
 }

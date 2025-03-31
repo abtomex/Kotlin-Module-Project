@@ -19,7 +19,7 @@ class Note(name: String, var text: String = "", parentId: Int = 0): AbstractEnti
     }
 
     override fun toString(): String {
-        return "Заметка $name\n$text"
+        return "Заметка: $name\n$text"
     }
 
 

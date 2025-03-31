@@ -2,8 +2,7 @@ package consoleview
 
 interface ViewDecorator {
 
-    fun show()
-//    fun type(): ConsoleViewType
-    fun forward(input: String): ViewDecorator?
+    fun show() : Int
+    fun forward(input: Int): ViewDecorator?
 
 }
