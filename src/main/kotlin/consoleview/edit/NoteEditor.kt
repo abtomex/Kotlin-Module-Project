@@ -10,6 +10,8 @@ class NoteEditor(override val model: Note) : AbstractConsoleEditor<Note, NoteRep
     override val repo = NoteRepo
 
     override fun show() {
+        println("---Заметка---")
+        println("---- back для возврата в список заметок")
         println(model)
     }
 

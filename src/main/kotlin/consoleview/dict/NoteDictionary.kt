@@ -19,15 +19,18 @@ class NoteDictionary(override val model: Set<Note>, parentId: Int) : AbstractCon
                 return ArchiveDictionary()
             }
             "new" -> {
-                println("Создать заметку")
+                println("---Создание заметки---")
                 println("Введите имя заметки")
                 val name = Scanner(System.`in`).nextLine().trim()
+
                 println("Введите текст заметки")
                 val text = Scanner(System.`in`).nextLine().trim()
+
                 var archive = ArchiveRepo.getById(parentId)
                 repo.save(Note(name, text), archive)
+
                 archive = ArchiveRepo.getById(parentId)
-                println("Заметка успешно сохранена")
+                println("+++ Заметка успешно создана +++")
                 return NoteDictionary(archive.notes.values.toSet(), parentId)
             }
             else -> {

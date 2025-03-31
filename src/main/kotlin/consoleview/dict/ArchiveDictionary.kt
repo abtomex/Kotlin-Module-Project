@@ -3,6 +3,7 @@ package consoleview.dict
 import consoleview.ViewDecorator
 import model.Archive
 import repo.ArchiveRepo
+import java.util.Scanner
 
 class ArchiveDictionary : AbstractConsoleDictionary<Archive, ArchiveRepo>(0) {
 
@@ -12,19 +13,34 @@ class ArchiveDictionary : AbstractConsoleDictionary<Archive, ArchiveRepo>(0) {
 
     override fun forward(input: String): ViewDecorator? {
 
-        if (input == "exit") return null
-        val selected = repo.getOneByName(input)
-        if(selected == null) {
-            println("Введите корректное имя архива")
-            return this
+        when(input) {
+            "new" -> {
+                println("---Создание архива---")
+                println("Введите имя архива")
+                val name = Scanner(System.`in`).nextLine().trim()
+
+                repo.save(Archive(name))
+                println("+++ Архив успешно создан +++")
+                return ArchiveDictionary()
+            }
+            "exit" -> return null
+            else -> {
+                val selected = repo.getOneByName(input)
+                if(selected == null) {
+                    println("! Введите корректное имя архива")
+                    return this
+                }
+                return NoteDictionary(selected.notes.values.toSet(), selected.id)
+
+            }
         }
-        return NoteDictionary(selected.notes.values.toSet(), selected.id)
+
     }
 
     override fun show() {
         println("---Выберите архив---")
         println("---- exit для выхода из приложения")
-        println("---- edit для редактирования")
+        println("---- new для добавления нового")
 
         super.show()
     }
