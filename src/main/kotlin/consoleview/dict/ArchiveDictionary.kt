@@ -17,7 +17,8 @@ class ArchiveDictionary : AbstractConsoleDictionary<Archive, ArchiveRepo>(0) {
             0 -> {
                 println("---Создание архива---")
                 println("Введите имя архива")
-                val name = Scanner(System.`in`).nextLine().trim()
+                val scanner = Scanner(System.`in`)
+                val name = scanner.nextLine().trim()
                 if(name.isEmpty()) {
                     println("! Имя архива не может быть пустым")
                     return ArchiveDictionary()

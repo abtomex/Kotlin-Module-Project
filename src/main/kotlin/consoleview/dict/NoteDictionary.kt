@@ -18,13 +18,14 @@ class NoteDictionary(override val model: List<Note>, parentId: Int, val title: S
             0 -> {
                 println("---Создание заметки---")
                 println("Введите имя заметки")
-                val name = Scanner(System.`in`).nextLine().trim()
+                val scanner = Scanner(System.`in`)
+                val name = scanner.nextLine().trim()
                 if(name.isEmpty()) {
                     println("! Имя заметки не может быть пустым")
                     return this
                 }
                 println("Введите текст заметки")
-                val text = Scanner(System.`in`).nextLine().trim()
+                val text = scanner.nextLine().trim()
                 if(text.isEmpty()) {
                     println("! Текст заметки не может быть пустым")
                     return this

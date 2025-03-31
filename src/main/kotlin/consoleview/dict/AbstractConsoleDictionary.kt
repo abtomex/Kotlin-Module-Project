@@ -13,9 +13,7 @@ abstract class AbstractConsoleDictionary<E, R>(val parentId: Int) :
     override fun show() : Int {
 
         var idx = 0
-        model
-            .map { entity -> String.format("%d. %s", ++idx, entity.name) }
-            .forEach { println(it) }
+        model.forEach { println( "${++idx}. ${it.name}") }
         return idx
     }
 
