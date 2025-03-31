@@ -1,3 +1,7 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import service.ConsoleManager
+
+fun main() {
+
+    ConsoleManager.showContentWithNavigation()
+
 }
